@@ -1,0 +1,31 @@
+services:
+  - type: web_service
+    name: future-fs-02-backend
+    env: node
+    branch: main
+    rootDirectory: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DB_HOST
+        value: your_database_host
+      - key: DB_USER
+        value: your_database_user
+      - key: DB_PASSWORD
+        value: your_database_password
+      - key: DB_NAME
+        value: your_database_name
+      - key: DB_PORT
+        value: "3306"
+      - key: JWT_SECRET
+        value: your_jwt_secret
+
+  - type: static_site
+    name: future-fs-02-frontend
+    branch: main
+    rootDirectory: client
+    buildCommand: npm install && npm run build
+    publishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://your-backend-service.onrender.com
